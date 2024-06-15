@@ -1,0 +1,48 @@
+from PIL import Image, ImageDraw
+
+def draw_picture(output_filename):
+    # Create a blank image with white background
+    width, height = 800, 600
+    image = Image.new("RGB", (width, height), "white")
+    draw = ImageDraw.Draw(image)
+
+    # Draw the house
+    house_body = [(200, 300), (600, 600)]  # Bottom-left and top-right corners
+    draw.rectangle(house_body, fill="lightblue", outline="black")
+
+    # Draw the roof
+    roof = [(200, 300), (400, 150), (600, 300)]
+    draw.polygon(roof, fill="brown", outline="black")
+
+    # Draw the door
+    door = [(350, 450), (450, 600)]
+    draw.rectangle(door, fill="saddlebrown", outline="black")
+
+    # Draw the windows
+    window1 = [(250, 350), (350, 450)]
+    window2 = [(450, 350), (550, 450)]
+    draw.rectangle(window1, fill="white", outline="black")
+    draw.rectangle(window2, fill="white", outline="black")
+
+    # Draw window panes
+    draw.line([(250, 400), (350, 400)], fill="black", width=2)  # Horizontal line for window 1
+    draw.line([(300, 350), (300, 450)], fill="black", width=2)  # Vertical line for window 1
+    draw.line([(450, 400), (550, 400)], fill="black", width=2)  # Horizontal line for window 2
+    draw.line([(500, 350), (500, 450)], fill="black", width=2)  # Vertical line for window 2
+
+    # Draw the sun
+    sun_center = (100, 100)
+    sun_radius = 50
+    draw.ellipse([sun_center[0] - sun_radius, sun_center[1] - sun_radius,
+                  sun_center[0] + sun_radius, sun_center[1] + sun_radius], fill="yellow", outline="orange")
+
+    # Draw the ground
+    draw.rectangle([(0, 600), (800, 700)], fill="green")
+
+    # Save the image
+    image.save(output_filename)
+    print(f"Picture saved as {output_filename}")
+
+if __name__ == "__main__":
+    output_filename = "house_picture.png"
+    draw_picture(output_filename)
