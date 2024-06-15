@@ -1,0 +1,26 @@
+def is_odd(number):
+    """
+    Function to check if a number is odd.
+    Returns True if the number is odd, otherwise False.
+    """
+    return number % 2 != 0
+
+def main():
+    print("Odd Number Identification")
+    while True:
+        try:
+            # Get user input
+            num = int(input("Enter a number (or 'q' to quit): "))
+
+            # Check if the number is odd
+            if is_odd(num):
+                print(f"{num} is an odd number.")
+            else:
+                print(f"{num} is not an odd number.")
+        except ValueError:
+            # If the user enters 'q', exit the loop
+            print("Exiting...")
+            break
+
+if __name__ == "__main__":
+    main()
