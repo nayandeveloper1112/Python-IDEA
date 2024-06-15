@@ -1,0 +1,49 @@
+# We can use the Python library PIL (Python Imaging Library) for image creation and manipulation. Here's a simple example of how you can create a basic company logo using Python: First, make sure you have the Pillow library installed. If not, you can install it using:
+pip install pillow
+
+
+from PIL import Image, ImageDraw, ImageFont
+
+# Function to create a simple logo
+def create_logo(company_name, tagline, output_filename):
+    # Create a blank image with white background
+    width, height = 800, 400
+    logo = Image.new("RGB", (width, height), "white")
+    draw = ImageDraw.Draw(logo)
+
+    # Define font and size
+    try:
+        font = ImageFont.truetype("arial.ttf", 60)
+        tagline_font = ImageFont.truetype("arial.ttf", 40)
+    except IOError:
+        font = ImageFont.load_default()
+        tagline_font = ImageFont.load_default()
+
+    # Calculate text size and position
+    text_width, text_height = draw.textsize(company_name, font=font)
+    tagline_width, tagline_height = draw.textsize(tagline, font=tagline_font)
+    
+    # Positioning text in the center
+    text_x = (width - text_width) / 2
+    text_y = (height - text_height) / 2 - 20
+    tagline_x = (width - tagline_width) / 2
+    tagline_y = text_y + text_height + 10
+
+    # Draw text on image
+    draw.text((text_x, text_y), company_name, fill="black", font=font)
+    draw.text((tagline_x, tagline_y), tagline, fill="gray", font=tagline_font)
+
+    # Optionally, you can add more graphics like lines, shapes, etc.
+    # Draw a rectangle around the text
+    draw.rectangle([text_x - 10, text_y - 10, text_x + text_width + 10, text_y + text_height + 10], outline="black", width=2)
+
+    # Save the logo
+    logo.save(output_filename)
+    print(f"Logo saved as {output_filename}")
+
+if __name__ == "__main__":
+    company_name = "My Company"
+    tagline = "Excellence and Innovation"
+    output_filename = "company_logo.png"
+
+    create_logo(company_name, tagline, output_filename)
