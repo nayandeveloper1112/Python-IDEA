@@ -1,0 +1,11 @@
+def find_even_numbers(numbers):
+    even_numbers = [num for num in numbers if num % 2 == 0]
+    return even_numbers
+
+if __name__ == "__main__":
+    # Example list of numbers
+    numbers = [10, 15, 22, 33, 42, 55, 60, 71, 84, 97]
+
+    # Find and print even numbers
+    even_numbers = find_even_numbers(numbers)
+    print("Even numbers in the list are:", even_numbers)
